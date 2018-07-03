@@ -1,8 +1,7 @@
 package com.delivery.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-
-import com.delivery.dto.StoreDetailDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Store extends StoreDetailDto {
-    
+public class Store extends AbstractEntity {
+    @Embedded
+    private StoreDetail store;
 }

@@ -1,16 +1,16 @@
-package com.delivery.dto;
+package com.delivery.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-import com.delivery.domain.AbstractEntity;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-
-@Data
-@MappedSuperclass
-public class StoreDetailDto extends AbstractEntity {
+@Getter
+@Setter
+@Embeddable
+public class StoreDetail {
     @Id private Long id;
     @Column(nullable=false, length=255, unique=true)
     private String address;

@@ -1,22 +1,23 @@
-package com.delivery.dto;
+package com.delivery.domain;
 
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-import com.delivery.domain.AbstractEntity;
 import com.delivery.domain.constants.DeliveryLifeCycle;
 import com.delivery.domain.constants.PaymentMethod;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@MappedSuperclass
-public class DeliveryInfoDetailDto extends AbstractEntity {
+@Getter
+@Setter
+@Embeddable
+public class DeliveryInfoDetail {
     @Id
     private Long id;
     private Long driverId;

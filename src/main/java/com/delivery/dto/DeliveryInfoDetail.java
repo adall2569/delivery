@@ -1,4 +1,4 @@
-package com.delivery.domain;
+package com.delivery.dto;
 
 import java.util.Date;
 

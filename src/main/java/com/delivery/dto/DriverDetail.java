@@ -1,4 +1,4 @@
-package com.delivery.domain;
+package com.delivery.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

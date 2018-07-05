@@ -3,6 +3,8 @@ package com.delivery.domain;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
+import com.delivery.dto.StoreDetail;
+
 import lombok.Getter;
 import lombok.Setter;
 

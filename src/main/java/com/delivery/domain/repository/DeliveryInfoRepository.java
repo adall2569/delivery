@@ -1,11 +1,11 @@
 package com.delivery.domain.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.delivery.domain.DeliveryInfo;
 
 @Repository
-public interface DeliveryInfoRepository extends CrudRepository<DeliveryInfo, Long> {
+public interface DeliveryInfoRepository extends JpaRepository<DeliveryInfo, Long> {
     
 }

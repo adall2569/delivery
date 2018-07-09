@@ -2,7 +2,7 @@
 	<div>
 		<el-form :model="form" :label-width="formLabelWidth">
 			<el-form-item :label="label.telephone">
-				<el-input v-model="form.telephone"></el-input>
+				<el-input v-model="form.telephone"/>
 			</el-form-item>
 			<el-form-item label="Activity time">
 				<el-col :span="16">
@@ -10,24 +10,24 @@
 				</el-col>
 			</el-form-item>
 			<el-form-item :label="label.address">
-				<el-input v-model="form.address"></el-input>
+				<el-input v-model="form.address"/>
 			</el-form-item>
 			<el-form-item :label="label.price">
-				<el-input v-model="form.price"></el-input>
+				<el-input v-model="form.price"/>
 			</el-form-item>
 			<el-form-item :label="label.pickUpTime">
-				<el-input-number v-model="form.pickUpTime" :step="10"></el-input-number>
+				<el-input-number v-model="form.pickUpTime" :step="10"/>
 			</el-form-item>
 			<el-form-item :label="label.paymentMethod">
 				<el-radio v-model="form.paymentMethod" label="1">{{label.byCard}}</el-radio>
   			<el-radio v-model="form.paymentMethod" label="2">{{label.byChash}}</el-radio>
 			</el-form-item>
 			<el-form-item :label="label.deliveryFee">
-				<el-input v-model="form.deliveryFee"></el-input>
+				<el-input v-model="form.deliveryFee"/>
 			</el-form-item>
 			<el-form-item class="dialog-footer">
-				<el-button @click="createDelivery('cancel')">{{label.cancel}}</el-button>
-				<el-button type="primary" @click="createDelivery">{{label.confirm}}</el-button>
+				<el-button @click="onClickCreate('cancel')">{{label.cancel}}</el-button>
+				<el-button type="primary" @click="onClickCreate">{{label.confirm}}</el-button>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -38,7 +38,7 @@ import Constants from '../common/constants/Constants'
 
 export default {
 	name: 'CreateDelivery',
-	props: ['showDialog'],
+	props: [],
 	data() {
 		return {
 			form: {
@@ -68,18 +68,11 @@ export default {
 		}
 	},
 	methods: {
-		handleCurrentChange(val) {
-			this.currentRow = val
-			// TODO: go to detail page
-		},
-		filterTag(value, row) {
-			return row.tag === value
-		},
-		createDelivery(msg) {
+		onClickCreate(msg) {
 			if (msg === 'cancel') {
-				this.$emit('createDelivery', msg)
+				this.$emit('onClickCreate', msg)
 			} else {
-				this.$emit('createDelivery', this.form)
+				this.$emit('onClickCreate', this.form)
 			}
 		}
 	}

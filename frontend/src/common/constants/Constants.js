@@ -1,5 +1,12 @@
 const Constants = {
 	LABEL: {
+		CHARGE: {
+			additional: '충전 금액',
+			after: '충전 후 금액',
+			charging: '충전하기',
+			current: '현재 금액',			
+			title: '예치금 충전'
+		},
 		CREATE: {
 			address: '주소',
 			byCard: '카드',
@@ -16,6 +23,13 @@ const Constants = {
 		COMMON: {
 			cancel: '취소',
 			confirm: '확인'
+		},
+		SETTING: {
+			address: '주소',
+			companyName: '회사명',
+			resigDate: '등록 일자',
+			telephone: '전화번호',
+			title: '설정'
 		}
 	}
 }

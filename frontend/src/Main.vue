@@ -2,13 +2,13 @@
   <el-container>
 		<div class="cont-header">
 			<el-header>
-				<el-button icon="el-icon-setting" class="create-btn"></el-button>
+				<el-button icon="el-icon-setting" class="create-btn" @click="showSettingDialog = true"></el-button>
 			</el-header>
 		</div>
 		<el-main>
 			<div class="cont-body">
 				<div class="body-header">
-					<el-button type="success" @click="showDialog = true" class="create-btn">
+					<el-button type="success" @click="showCreateDialog = true" class="create-btn">
 						배송 등록
 					</el-button>
 				</div>
@@ -33,14 +33,25 @@
 						3000원
 					</div>
 				</el-card>
-				<el-button type="warning">예치금 충전</el-button>
+				<el-button type="warning" @click="showChargeDialog = true">예치금 충전</el-button>
 			</div>
 		</el-footer>
-		<el-dialog :title="label.title" :visible.sync="showDialog" width="30%">
+		<el-dialog :title="label.createTitle" :visible.sync="showCreateDialog" width="30%">
 			<create-delivery
-				:showDialog="showDialog"
-				@close="showDialog = false"
-				@createDelivery="createDelivery"
+				@close="showCreateDialog = false"
+				@onClickCreate="onClickCreate"
+			/>
+		</el-dialog>
+		<el-dialog :title="label.chargeTitle" :visible.sync="showChargeDialog" width="30%">
+			<charge-deposit
+				@close="showChargeDialog = false"
+				@onClickCharge="onClickCharge"
+			/>
+		</el-dialog>
+		<el-dialog :title="label.settingTitle" :visible.sync="showSettingDialog" width="30%">
+			<setting-info
+				@close="showSettingDialog = false"
+				@onClickSetting="onClickSetting"
 			/>
 		</el-dialog>
   </el-container>
@@ -48,18 +59,24 @@
 
 <script>
 import TrackingDelivery from './trackingDelivery/TrackingDelivery'
+import ChargeDeposit from './trackingDelivery/ChargeDeposit'
 import CreateDelivery from './trackingDelivery/CreateDelivery'
+import SettingInfo from './trackingDelivery/SettingInfo'
 import Constants from './common/constants/Constants'
 
 export default {
-	name: 'TabIcons',
-	components: { TrackingDelivery, CreateDelivery },
+	name: 'Main',
+	components: { TrackingDelivery, ChargeDeposit, CreateDelivery, SettingInfo },
 	data() {
 		return {
 			activeName: 'first',
-			showDialog: false,
+			showChargeDialog: false,
+			showCreateDialog: false,
+			showSettingDialog: false,
 			label: {
-				title: Constants.LABEL.CREATE.title
+				chargeTitle: Constants.LABEL.CHARGE.title,
+				createTitle: Constants.LABEL.CREATE.title,
+				settingTitle: Constants.LABEL.SETTING.title
 			}
 		}
 	},
@@ -67,12 +84,23 @@ export default {
 		handleClick(tab, event) {
 			console.log(tab, event)
 		},
-		createDelivery(result) {
-			console.log(result)
+		onClickCharge(result) {
+			if (result !== 'cancel') {
+				// call charge deposit API
+			}
+			this.showChargeDialog = false
+		},
+		onClickCreate(result) {
 			if (result !== 'cancel') {
 				// call create delivery API
 			}
-			this.showDialog = false
+			this.showCreateDialog = false
+		},
+		onClickSetting(result) {
+			if (result !== 'cancel') {
+				// call create delivery API
+			}
+			this.showSettingDialog = false
 		}
 	}
 }

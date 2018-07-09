@@ -30,6 +30,15 @@ const Constants = {
 			resigDate: '등록 일자',
 			telephone: '전화번호',
 			title: '설정'
+		},
+		VIEW: {
+			deliveryMan: '기사 정보',
+			destination: '배달 장소',
+			method: '결재 방법',
+			pickUpTime: '픽업 시간',
+			price: '결재 가격',
+			startTime: '시작 시간',
+			status: '배송 상태'
 		}
 	}
 }

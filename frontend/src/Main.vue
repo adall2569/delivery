@@ -9,7 +9,7 @@
 			<div class="cont-body">
 				<div class="body-header">
 					<el-button type="success" @click="showCreateDialog = true" class="create-btn">
-						배송 등록
+						{{label.createTitle}}
 					</el-button>
 				</div>
 				<el-tabs v-model="activeName" @tab-click="handleClick">
@@ -33,7 +33,7 @@
 						3000원
 					</div>
 				</el-card>
-				<el-button type="warning" @click="showChargeDialog = true">예치금 충전</el-button>
+				<el-button type="warning" @click="showChargeDialog = true">{{label.chargeTitle}}</el-button>
 			</div>
 		</el-footer>
 		<el-dialog :title="label.createTitle" :visible.sync="showCreateDialog" width="30%">

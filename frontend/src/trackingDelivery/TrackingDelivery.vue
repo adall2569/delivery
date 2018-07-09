@@ -14,38 +14,38 @@
 			/>
 			<el-table-column
 				property="startTime"
-				label="시작 시간"
+				:label="label.startTime"
 				width="200"
 				sortable
 			/>
 			<el-table-column
 				property="pickUpTime"
-				label="픽업 시간"
+				:label="label.pickUpTime"
 				width="200"
 			/>
 			<el-table-column
 				property="destination"
-				label="배달 장소"
+				:label="label.destination"
 				width="200"
 			/>
 			<el-table-column
 				property="price"
-				label="결재 가격"
+				:label="label.price"
 				width="200"
 			/>
 			<el-table-column
 				property="method"
-				label="결재 방법"
+				:label="label.method"
 				width="200"
 			/>
 			<el-table-column
 				property="deliveryMan"
-				label="기사 정보"
+				:label="label.deliveryMan"
 				width="200"
 			/>
 			<el-table-column
 				property="status"
-				label="배송 상태"
+				:label="label.status"
 				sortable
 				:filters="statusFilter"
       	:filter-method="filterTag"
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import Constants from '../common/constants/Constants'
+
 export default {
 	name: 'TrackingDelivery',
 	data() {
@@ -102,7 +104,16 @@ export default {
 				text: '주문 접수',
 				value: '주문 접수'
 			}],
-			currentRow: null
+			currentRow: null,
+			label: {
+				deliveryMan: Constants.LABEL.VIEW.deliveryMan,
+				destination: Constants.LABEL.VIEW.destination,
+				method: Constants.LABEL.VIEW.method,
+				pickUpTime: Constants.LABEL.VIEW.pickUpTime,
+				price: Constants.LABEL.VIEW.price,
+				startTime: Constants.LABEL.VIEW.startTime,
+				status: Constants.LABEL.VIEW.status
+			}
 		}
 	},
 	methods: {

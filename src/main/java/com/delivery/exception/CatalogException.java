@@ -6,7 +6,7 @@ import java.util.Map;
 public class CatalogException extends RuntimeException {
     private static final long serialVersionUID = -2739156833589717194L;
 
-    protected ErrorCode errCode = ErrorCode.CATALOG_INTERNAL_SERVER_ERROR;
+    protected ErrorCode errCode = ErrorCode.INTERNAL_SERVER_ERROR;
     protected Map<String, Object> info = new HashMap<>();
 
     public CatalogException() {

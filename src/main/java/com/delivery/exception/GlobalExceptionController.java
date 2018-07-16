@@ -73,7 +73,7 @@ public class GlobalExceptionController {
     @ResponseBody
     public ResponseData handleThrowable(HttpServletRequest request, Throwable ex) {
         log.error(ex.getMessage(), ex);
-        ResponseData rData = new ResponseData(ErrorCode.CATALOG_INTERNAL_SERVER_ERROR.getCode(), ex.getMessage(), null);
+        ResponseData rData = new ResponseData(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ex.getMessage(), null);
         return rData;
     }
 }

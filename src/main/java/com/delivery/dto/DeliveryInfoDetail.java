@@ -3,21 +3,21 @@ package com.delivery.dto;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 import com.delivery.domain.constants.DeliveryLifeCycle;
 import com.delivery.domain.constants.PaymentMethod;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
-@Embeddable
-public class DeliveryInfoDetail {
+@Data
+@EqualsAndHashCode(callSuper=false)
+@MappedSuperclass
+public class DeliveryInfoDetail extends AbstractEntity {
     @Id
     private Long id;
     private Long driverId;

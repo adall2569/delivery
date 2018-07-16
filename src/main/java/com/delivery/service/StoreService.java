@@ -1,5 +1,6 @@
 package com.delivery.service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
@@ -23,34 +24,62 @@ public class StoreService {
     
     @Transactional
     public StoreDetail createStore(StoreDetail detail) {
-        StoreDetail storeDetail = mapper.map(detail, StoreDetail.class);
+        validateCreate(detail);
         
-        Store store = new Store();
-        store.setStore(storeDetail);
+        Store store = mapper.map(detail, Store.class);
         
         Store savedStore = storeRepository.save(store);
         
-        return savedStore.getStore();
+        return savedStore;
     }
     
     @Transactional
     public StoreDetail patchStore(String id, StoreDetail detail) {
-        Store store = storeRepository.findById(UUID.fromString(id));
-        if (store == null) {
-            throw new CatalogException(ErrorCode.CATALOG_CANNOT_FIND_STORE);
-        }
-        store.setStore(detail);
+        validateUpdate(detail);
         
-        return detail;
+        Optional<Store> oStore = storeRepository.findById(UUID.fromString(id));
+        if (!oStore.isPresent()) {
+            throw new CatalogException(ErrorCode.CANNOT_FIND_STORE);
+        }
+        
+        Store store = oStore.get();
+        store.update(detail);
+        
+        return store;
     }
     
     @Transactional(readOnly=true)
     public Store getStore(String id) {
-        Store store = storeRepository.findById(UUID.fromString(id));
-        if (store == null) {
-            throw new CatalogException(ErrorCode.CATALOG_CANNOT_FIND_STORE);
+        Optional<Store> oStore = storeRepository.findById(UUID.fromString(id));
+        if (!oStore.isPresent()) {
+            throw new CatalogException(ErrorCode.CANNOT_FIND_STORE);
         }
         
-        return store;
+        return oStore.get();
+    }
+    
+    @Transactional
+    public void deleteStore(String id) {
+        Optional<Store> oStore = storeRepository.findById(UUID.fromString(id));
+        if (!oStore.isPresent()) {
+            throw new CatalogException(ErrorCode.CANNOT_FIND_STORE);
+        }
+        
+        Store store = oStore.get();
+        store.setRemoved(true);
+    }
+    
+    private void validateCreate(StoreDetail detail) {
+        Store store = storeRepository.findByAddress(detail.getAddress());
+        if (store != null) {
+            throw new CatalogException(ErrorCode.STORE_CONFLICT_ADDRESS);
+        }
+    }
+    
+    private void validateUpdate(StoreDetail detail) {
+        Store store = storeRepository.findByAddress(detail.getAddress());
+        if (store != null) {
+            throw new CatalogException(ErrorCode.STORE_CONFLICT_ADDRESS);
+        }
     }
 }

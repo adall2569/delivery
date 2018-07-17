@@ -22,6 +22,8 @@ public class DeliveryService {
     
     @Transactional
     public DeliveryInfoDetail createDeliveryInfo(DeliveryInfoDetail detail) {
+        validateCreate(detail);
+        
         DeliveryInfo deliveryInfo = mapper.map(detail, DeliveryInfo.class);
         
         DeliveryInfo savedDeliveryInfo = deliveryInfoRepository.save(deliveryInfo);
@@ -31,6 +33,7 @@ public class DeliveryService {
     
     @Transactional
     public DeliveryInfoDetail patchDeliveryInfo(Long id, DeliveryInfoDetail detail) {
+        validateUpdate(id, detail);
         Optional<DeliveryInfo> oDeliveryInfo = deliveryInfoRepository.findById(id);
         if (!oDeliveryInfo.isPresent()) {
             throw new CatalogException(ErrorCode.CANNOT_FIND_DELIVERY);
@@ -45,19 +48,15 @@ public class DeliveryService {
     @Transactional(readOnly=true)
     public DeliveryInfo getDeliveryInfo(Long id) {
         Optional<DeliveryInfo> oDeliveryInfo = deliveryInfoRepository.findById(id);
-        if (!oDeliveryInfo.isPresent()) {
-            throw new CatalogException(ErrorCode.CANNOT_FIND_DELIVERY);
-        }
         
         return oDeliveryInfo.get();
     }
     
     @Transactional
     public void deleteDeliveryInfo(Long id) {
+        validateDelete(id);
+        
         Optional<DeliveryInfo> oDeliveryInfo = deliveryInfoRepository.findById(id);
-        if (!oDeliveryInfo.isPresent()) {
-            throw new CatalogException(ErrorCode.CANNOT_FIND_DELIVERY);
-        }
         
         DeliveryInfo deliveryInfo = oDeliveryInfo.get();
         deliveryInfo.setRemoved(true);
